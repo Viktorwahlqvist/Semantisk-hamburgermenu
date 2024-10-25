@@ -1,0 +1,150 @@
+@import 'variables';
+@import 'reset';
+@import 'mixins';
+
+body{
+        background-color: antiquewhite;
+    header{
+            label.hamburger-menu{
+            // Display flex för att linjerna ska vara på varandra.
+            display: flex;
+            flex-direction: column;
+            // Använder variabeln gap för att få mellan rummen mellan linjerna.
+            gap: $hamburger-gap;
+            // max-width så att det inte tar upp mer plats än vad som behövs.
+            width: max-content;
+            // Vill kunna justera vart menyn finns.
+            position: absolute;
+            top: $hamburger-margin;
+            left: $hamburger-margin;
+            // Så att den alltid är ovanpå annan content.
+            z-index: 2;
+            // Detta är enbart för att man ska kunna se att det är 
+            // klickbart.
+            cursor: pointer;
+            //  & betyder allt innan, så detta är bara för att slippa skriva allt innan
+            // input.
+            & input{
+                // Använder appearance none för att man vill ändra utseende.
+                //  inte att den vanliga checkbox ska synas. 
+                // Vill att den input linjen som vi skapade nedanför ska
+                // synas. därför använder man sig av appearance none och inte t.ex
+                // opacity :0 eller display: hidden.
+                appearance: none;
+                // så att inte checkboxen i mitten markeras. 
+                outline: none;
+                // pointer-events så att man inte kan klicka på checkboxen
+                // eftersom att man vill att man ska kunna klicka på hela menyn
+                // och inte bara på linjen i mitten. därför ligger checkboxen i en label
+                // så att det går att klicka vart man vill.
+                pointer-events: none;
+
+                &:checked{
+                    // För att kunna skapa ett X när menyn är öppen
+                    // så behöver vi ta bort en linje. 
+                    // När checkboxen är checkad så blir den linjen som är
+                    // i mitten dvs checkboxen osynlig.
+                    opacity: 0;
+                    width: 0;
+                }
+                
+
+            }
+            // Vill komma åt before elementet medans checkbox är checked
+            // Därför skriver jag om labeln hamburger meny har en checkbox
+            // som är checkad så ska before elementet..
+            &:has(input:checked)::before{
+                // När labeln har en checkbox som är checkad så ska
+                // before elementet rotera så before och after elementen
+                // kan bilda ett kryss.
+                rotate: 45deg;
+                // With har vi räknat ut i variables.
+                width: $x-width;
+                // Vill att x och y positionerna ska flyttas så att det 
+                // Ser mer ut som ett kryss
+                translate: 0 calc($bar-height / -2);
+                
+            }
+            // Detta är samma fast för before elementet som är den understa
+            // linjen
+            &:has(input:checked)::after{
+                rotate: -45deg;
+                // With har vi räknat ut i variables.
+                width: $x-width;
+                // Vill att x och y positionerna ska flyttas så att det 
+                // Ser mer ut som ett kryss
+                translate: 0 calc($bar-height / 2);
+            }
+
+            
+
+            
+        }
+        
+        aside{
+            translate: -100%;
+            transition: translate $animation-timing;
+            padding: 0.5rem 1rem;
+            padding-top: calc($hamburger-height + $hamburger-margin + 1rem);
+            background-color: $third-color;
+            max-width: 10rem;
+            min-height: 100vh;
+            a{
+                color: $primary-color;
+            }
+            
+        nav{
+            
+            ul{
+                
+                li{
+                    list-style: none;
+                    margin: 10px;
+
+                    a{
+                        text-decoration: none;
+                    }
+                }
+
+
+            }
+
+
+        }
+
+    }
+
+}
+
+.hamburger-menu:has(input:checked) ~ aside {
+    translate: 0;
+}
+
+// Skapar dom 3 linjerna för menyn
+// Before,after och input kommer vara 3 olika linjer för att 
+// skapa hmburgar menyn.
+.hamburger-menu::before,
+.hamburger-menu::after,
+.hamburger-menu input
+ 
+{   //Eftersom att before och after inte har något innehåll
+    // så ger vi dom contetn som är en tom string.
+    content: "";
+    // Här använder vi variablar som vi skapat för att
+    //ge linjerna en höjd, bredd.
+    width: $bar-width;
+    height: $bar-height;
+    background-color: $secondary-color;
+    border-radius: 10px;
+    // När man öpnnar menyn så skapas ett kryss och vill att den ska rotera
+    // med högra sidan av linjen och inte vänstra
+    transform-origin: left center;
+    //Vill att transition opacity, with, translate och rotate ska ha 
+    // samma animation
+    transition: opacity $animation-timing, width $animation-timing,
+    translate $animation-timing, rotate $animation-timing,
+    background-color $animation-timing;
+
+}
+
+}

@@ -1,0 +1,75 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: antiquewhite;
+}
+body header label.hamburger-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: -moz-max-content;
+  width: max-content;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  cursor: pointer;
+}
+body header label.hamburger-menu input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  pointer-events: none;
+}
+body header label.hamburger-menu input:checked {
+  opacity: 0;
+  width: 0;
+}
+body header label.hamburger-menu:has(input:checked)::before {
+  rotate: 45deg;
+  width: 50.9116882453px;
+  translate: 0 -4px;
+}
+body header label.hamburger-menu:has(input:checked)::after {
+  rotate: -45deg;
+  width: 50.9116882453px;
+  translate: 0 4px;
+}
+body header aside {
+  translate: -100%;
+  transition: translate 300ms ease-in-out;
+  padding: 0.5rem 1rem;
+  padding-top: calc(44px + 1rem);
+  background-color: rgba(0, 0, 0, 0.498);
+  max-width: 10rem;
+  min-height: 100vh;
+}
+body header aside a {
+  color: red;
+}
+body header aside nav ul li {
+  list-style: none;
+  margin: 10px;
+}
+body header aside nav ul li a {
+  text-decoration: none;
+}
+body .hamburger-menu:has(input:checked) ~ aside {
+  translate: 0;
+}
+body .hamburger-menu::before,
+body .hamburger-menu::after,
+body .hamburger-menu input {
+  content: "";
+  width: 60px;
+  height: 8px;
+  background-color: black;
+  border-radius: 10px;
+  transform-origin: left center;
+  transition: opacity 300ms ease-in-out, width 300ms ease-in-out, translate 300ms ease-in-out, rotate 300ms ease-in-out, background-color 300ms ease-in-out;
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,28 @@
+// Skapar variablar så att vi lätt kan ändra storlek på menyn osv.
+// längden på 1 linje
+$bar-width: 60px;
+// Höjden på 1 linje.
+$bar-height: 8px;
+// Gap (mellanrum) mellan dom 3 horisontella linjerna.
+$hamburger-gap: 6px;
+// justering av hamburgarmenyns plats.
+$hamburger-margin: 8px;
+// Hamburger height för att kunna räkna ut höjden på hela
+// hamburgarmenyn för att sedan kunna räkna ut hur långt before och after
+// elementen ska vara för att passa krysset.
+// För att få reda på höjden så tar vi bar height multiplicerat med 3
+// eftersom vi har 3 st linjer. sedan plussar vi på det med mellanrummet som
+// är 2 st. så hamburger gap multiplicerat med 2.
+$hamburger-height: calc(($bar-height) * 3 + ($hamburger-gap) * 2);
+// En variabel som ska vara width när menyn är öppen och krysset ska visas.
+// Höjden av hela hamburgar menyn multiplicerat med roten ur 2 för
+// för att få ut längden av en triangel.
+$x-width: calc($hamburger-height * 1.41421356237);
+// Sakapar variablar för 3 olika backgrundsfärger.
+$primary-color: red;
+$secondary-color: black;
+$third-color: rgba(0, 0, 0, 0.498);
+// Animation-timing för att all animation ska ha samma timing
+// 300ms är hur lång tid det tar för transition att ease in eller out
+// beroende på om man öppnar eller stänger menyn.
+$animation-timing: 300ms ease-in-out;
